@@ -1,0 +1,22 @@
+/* stylelint-disable-next-line at-rule-no-unknown */
+@tailwind base;
+/* stylelint-disable-next-line at-rule-no-unknown */
+@tailwind components;
+/* stylelint-disable-next-line at-rule-no-unknown */
+@tailwind utilities;
+
+/* stylelint-disable-next-line at-rule-no-unknown */
+@layer components {
+  .container-shell {
+    /* stylelint-disable-next-line at-rule-no-unknown */
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .card-surface {
+    /* stylelint-disable-next-line at-rule-no-unknown */
+    @apply rounded-[24px] bg-white shadow-sm border border-ink/5;
+  }
+}
+
+body {
+  font-family: sans-serif;
+}
