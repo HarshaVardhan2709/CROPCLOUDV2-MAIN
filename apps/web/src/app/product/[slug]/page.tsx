@@ -7,6 +7,8 @@ import { Badge } from '@/components/ui/badge';
 import { api } from '@/lib/api';
 import { currency, formatDate, safeImageUrl } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = await api.product(slug);

@@ -3,6 +3,8 @@ import { ProductCard } from '@/components/products/product-card';
 import { api } from '@/lib/api';
 import { Product } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ShopPage({
   searchParams,
 }: {

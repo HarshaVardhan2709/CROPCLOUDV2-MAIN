@@ -8,6 +8,12 @@ import Chatbot from '../../components/Chatbot';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+// ✅ Force dynamic rendering because this page requires:
+// 1. Auth check (reads cookies)
+// 2. Real-time API data from backend
+// These must be executed at request time, not build time
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   // 🔐 AUTH CHECK - Homepage requires login
   const cookieStore = await cookies();

@@ -2,6 +2,8 @@ import { ProductCard } from '@/components/products/product-card';
 import { api } from '@/lib/api';
 import { Product } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const data = await api.products(`?category=${slug}`);
