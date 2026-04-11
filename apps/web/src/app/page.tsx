@@ -3,7 +3,6 @@ import { DealBanner } from '@/components/home/deal-banner';
 import { Hero } from '@/components/home/hero';
 import { ProductSection } from '@/components/home/product-section';
 import { api } from '@/lib/api';
-import Chatbot from '../../components/Chatbot';
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -75,8 +74,6 @@ export default async function HomePage() {
         />
       </div>
 
-      {/* 🤖 Chatbot only visible after login */}
-      <Chatbot />
     </>
   );
 }
