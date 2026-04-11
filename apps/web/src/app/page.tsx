@@ -11,6 +11,7 @@ import { redirect } from 'next/navigation';
 // 1. Auth check (reads cookies)
 // 2. Real-time API data from backend
 // These must be executed at request time, not build time
+// Deployment triggered: 2026-04-11
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
