@@ -3,8 +3,3 @@
   "outputDirectory": "apps/web/.next",
   "framework": "nextjs"
 }
-{
-  "buildCommand": "pnpm build",
-  "outputDirectory": ".next",
-  "framework": "nextjs"
-}
