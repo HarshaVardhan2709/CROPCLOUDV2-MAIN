@@ -5,15 +5,19 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('token');
   const { pathname } = request.nextUrl;
 
-  // Allow login and signup pages
-  if (pathname === '/login' || pathname === '/signup') {
-    if (token) {
+  // Public pages that don't require authentication
+  const publicPages = ['/login', '/signup', '/about', '/contact', '/faq', '/seller-onboarding'];
+  const isPublicPage = publicPages.some(page => pathname === page || pathname.startsWith(page + '/'));
+
+  if (isPublicPage) {
+    // If on login/signup with token, redirect to home
+    if ((pathname === '/login' || pathname === '/signup') && token) {
       return NextResponse.redirect(new URL('/', request.url));
     }
     return NextResponse.next();
   }
 
-  // Redirect to login if no token
+  // For all other pages, require authentication
   if (!token) {
     return NextResponse.redirect(new URL('/login', request.url));
   }

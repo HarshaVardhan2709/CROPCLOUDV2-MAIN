@@ -3,7 +3,6 @@ import { api } from '@/lib/api';
 import { Product } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
-export const fetchCache = 'force-no-store';
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

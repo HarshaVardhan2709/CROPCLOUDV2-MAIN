@@ -13,7 +13,6 @@ import { redirect } from 'next/navigation';
 // These must be executed at request time, not build time
 // Deployment triggered: 2026-04-11
 export const dynamic = 'force-dynamic';
-export const fetchCache = 'force-no-store';
 
 export default async function HomePage() {
   // 🔐 AUTH CHECK - Homepage requires login
