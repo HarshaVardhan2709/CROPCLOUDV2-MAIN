@@ -47,21 +47,20 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-  "@nestjs/cli": "^11.0.5",
-  "@nestjs/schematics": "^11.0.2",
-  "@nestjs/testing": "^11.0.7",
-  "@types/cookie-parser": "^1.4.8",
-  "@types/express": "^5.0.0",
-  "@types/jsonwebtoken": "^9.0.8",
-  "@types/multer": "^1.4.12",
-  "@types/node": "^22.13.10",
-  "@types/passport-jwt": "^4.0.1",
-  "@types/uuid": "^10.0.0",
-  "eslint": "^9.21.0",
-  "eslint-config-prettier": "^10.0.1",
-  "prettier": "^3.5.3",
-  "tsx": "^4.19.3",
-  "typescript": "^5.8.2"
-
-}
+    "@nestjs/cli": "^11.0.5",
+    "@nestjs/schematics": "^11.0.2",
+    "@nestjs/testing": "^11.0.7",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.13.10",
+    "@types/passport-jwt": "^4.0.1",
+    "@types/uuid": "^10.0.0",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.0.1",
+    "prettier": "^3.5.3",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
 }
