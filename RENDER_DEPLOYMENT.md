@@ -2,28 +2,25 @@
 
 ## Prerequisites
 - Render account (free at https://render.com)
-- GitHub repository (already set up)
-- Environment variables configured
+- GitHub repository (already set up) ✅
+- **Neon PostgreSQL database** (already set up) ✅
+- Neon connection string (DATABASE_URL)
 
 ---
 
-## Step 1: Create PostgreSQL Database on Render
+## Step 1: Get Your Neon Database Connection String
 
-1. Go to **https://dashboard.render.com**
-2. Click **New +** → **PostgreSQL**
-3. Configure:
-   - **Name**: `cropcloud-db`
-   - **Database**: `neondb` (matches schema)
-   - **User**: `neondb_owner`
-   - **Region**: Same as your API region
-   - **Keep other defaults**
-
-4. Click **Create Database**
-5. **Save the connection string** - you'll need it
+1. Go to **https://console.neon.tech**
+2. Select your project
+3. Copy the **Connection String** (looks like):
+   ```
+   postgresql://user:password@ep-xxxxx.us-east-1.aws.neon.tech/neondb?sslmode=require
+   ```
+4. **Save this** - you'll need it in Step 3
 
 ---
 
-## Step 2: Deploy NestJS API
+## Step 2: Deploy NestJS API on Render
 
 1. Click **New +** → **Web Service**
 2. **Connect GitHub**:
@@ -54,8 +51,8 @@
 In Render dashboard, go to your API service → **Environment**:
 
 ```
-# Database
-DATABASE_URL=postgresql://[user]:[password]@[host]:[port]/[database]
+# Database (from Neon)
+DATABASE_URL=postgresql://user:password@ep-xxxxx.us-east-1.aws.neon.tech/neondb?sslmode=require
 
 # JWT Secrets (generate random strings)
 JWT_ACCESS_SECRET=your_super_secret_access_key_here
