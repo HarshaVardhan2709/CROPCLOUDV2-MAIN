@@ -36,8 +36,9 @@ export function AuthBootstrap() {
             role: response.user?.role ?? null,
             user: response.user ?? null,
           });
-          // After setSession(...) in auth-bootstrap.tsx
-localStorage.setItem('cropcloud-token', response.accessToken);
+          // Set token in both cookie (for middleware) and localStorage (for client)
+          document.cookie = `token=${response.accessToken}; path=/; max-age=86400`;
+          localStorage.setItem('cropcloud-token', response.accessToken);
         }
       } catch {
         if (!cancelled) {

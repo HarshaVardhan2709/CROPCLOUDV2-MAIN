@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
     ],
   },
+  // Optimize for Vercel
+  swcMinify: true,
+  compress: true,
+  poweredByHeader: false,
 };
 
 export default nextConfig;

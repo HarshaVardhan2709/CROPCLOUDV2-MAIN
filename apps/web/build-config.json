@@ -1,0 +1,5 @@
+{
+  "buildCommand": "pnpm install && pnpm build --filter=web",
+  "devCommand": "pnpm dev --filter=web",
+  "installCommand": "pnpm install --frozen-lockfile"
+}

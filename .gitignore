@@ -8,3 +8,5 @@ coverage
 pnpm-lock.yaml
 apps/api/uploads/*
 !apps/api/uploads/.gitkeep
+
+.vercel

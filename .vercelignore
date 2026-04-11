@@ -1,0 +1,9 @@
+apps/api
+prisma
+.git
+.gitignore
+*.md
+.env
+.env.example
+.env.local
+.eslintrc.json
