@@ -1,5 +1,5 @@
 {
-  "buildCommand": "next build",
+  "buildCommand": "cd ../../ && pnpm install && pnpm --filter=web build",
   "outputDirectory": ".next",
-  "framework": "nextjs"
+  "nodeVersion": "20.17.0"
 }
