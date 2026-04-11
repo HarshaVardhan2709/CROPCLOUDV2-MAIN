@@ -13,11 +13,11 @@
     "incremental": true,
     "skipLibCheck": true,
     "strict": true,
+    "types": ["node"],
     "paths": {
       "src/*": [
         "./src/*"
       ]
-      "types": ["node"]
     }
   },
   "include": [
