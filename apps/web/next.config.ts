@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
   },
   compress: true,
   poweredByHeader: false,
+  // Disable static optimization to prevent build-time issues with dynamic pages
+  staticPageGenerationTimeout: 0,
 };
 
 export default nextConfig;
