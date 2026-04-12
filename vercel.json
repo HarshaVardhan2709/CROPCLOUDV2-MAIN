@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm --filter=api exec prisma generate && cd apps/web && pnpm build",
+  "buildCommand": "pnpm install && pnpm -r exec prisma generate && pnpm build --filter=web",
   "outputDirectory": "apps/web/.next",
   "framework": "nextjs"
 }
