@@ -6,7 +6,7 @@ services:
     repo: https://github.com/HarshaVardhan2709/CROPCLOUDV2-MAIN
     branch: master
     rootDir: apps/api
-    buildCommand: npm install -g pnpm && pnpm install && pnpm build
+    buildCommand: npm install -g pnpm && pnpm install && pnpm exec prisma generate && pnpm exec prisma migrate deploy --skip-generate && pnpm build
     startCommand: pnpm start:prod
     healthCheckPath: /
     envVars:
