@@ -8,22 +8,13 @@ services:
     rootDir: apps/api
     buildCommand: cd ../.. && npm install -g pnpm && pnpm install && pnpm exec prisma generate && cd apps/api && pnpm build
     startCommand: node dist/main
-      - fromGroup: cropcloud-api
-
-  - type: postgres
-    name: cropcloud-db
-    plan: free
-    databaseName: neondb
-    user: neondb_owner
     envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
       - key: DATABASE_URL
-        fromDatabase:
-          name: cropcloud-db
-          property: connectionString
-
-envVarGroups:
-  - name: cropcloud-api
-    envVars:
+        sync: false
       - key: JWT_ACCESS_SECRET
         sync: false
       - key: JWT_REFRESH_SECRET
