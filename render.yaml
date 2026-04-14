@@ -5,14 +5,9 @@ services:
     plan: free
     repo: https://github.com/HarshaVardhan2709/CROPCLOUDV2-MAIN
     branch: master
-    buildCommand: npm install -g pnpm && pnpm install && pnpm exec -C apps/api prisma generate && pnpm exec -C apps/api prisma migrate deploy --skip-generate && pnpm exec -C apps/api build
-    startCommand: pnpm exec -C apps/api start
-    healthCheckPath: /
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: PORT
-        value: 4000
+    rootDir: apps/api
+    buildCommand: cd ../.. && npm install -g pnpm && pnpm install && pnpm exec prisma generate && cd apps/api && pnpm build
+    startCommand: node dist/main
       - fromGroup: cropcloud-api
 
   - type: postgres
