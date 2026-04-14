@@ -5,8 +5,8 @@ services:
     plan: free
     repo: https://github.com/HarshaVardhan2709/CROPCLOUDV2-MAIN
     branch: master
-    buildCommand: npm install -g pnpm && pnpm install && pnpm exec prisma generate && pnpm run -C apps/api build
-    startCommand: node ./apps/api/dist/main.js
+    buildCommand: npm install -g pnpm && pnpm install && pnpm exec prisma generate && pnpm build
+    startCommand: cd apps/api && node dist/main.js
     envVars:
       - key: NODE_ENV
         value: production
