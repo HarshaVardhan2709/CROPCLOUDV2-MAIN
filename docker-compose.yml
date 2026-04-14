@@ -1,8 +1,7 @@
-# For Railway deployment
-# Change 5432 to 5432
-# Set build command: pnpm install && pnpm build --filter=api
-# Set start command: pnpm start --filter=api
-# Railway will auto-detect this Dockerfile if needed
+# For local production-like testing
+# This simulates a Render deployment environment with Docker
+# Use for testing before deploying to Render
+# Run: docker-compose up --build
 
 version: '3.8'
 

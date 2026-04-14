@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { useAuthStore } from '@/store/auth-store';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000/api/v1';
+
 export default function Chatbot() {
   const [messages, setMessages] = useState<any[]>([]);
   const [input, setInput] = useState('');
@@ -31,7 +33,7 @@ export default function Chatbot() {
 const token = localStorage.getItem('cropcloud-token') 
   || document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
 
-      const res = await fetch('http://127.0.0.1:4000/api/v1/chat', {
+      const res = await fetch(`${API_URL}/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

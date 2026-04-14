@@ -45,9 +45,58 @@ This monorepo contains a Next.js frontend (apps/web) and NestJS backend (apps/ap
 
 ---
 
-## Part 2: Deploy Backend to Railway/Render
+## Part 2: Deploy Backend to Render (or Railway)
 
-### Option A: Railway (Recommended)
+### Option A: Render (Recommended)
+
+1. **Create Render Account** (https://render.com)
+   - Sign up with GitHub for seamless integration
+
+2. **Create New Web Service**
+   - Click "New +" → "Web Service"
+   - Connect your GitHub repository
+   - Select your repository
+
+3. **Configure Service**
+   - **Name**: `cropcloud-api`
+   - **Environment**: Node
+   - **Region**: Choose closest to your users
+   - **Branch**: main
+   - **Build Command**: `pnpm install && pnpm build --filter=api`
+   - **Start Command**: `pnpm start --filter=api`
+
+4. **Set Environment Variables in Render Dashboard**
+   ```
+   PORT=4000
+   NODE_ENV=production
+   APP_URL=https://your-app.onrender.com
+   WEB_URL=https://your-frontend-domain.vercel.app
+   DATABASE_URL=postgresql://...  (your Neon connection string)
+   JWT_ACCESS_SECRET=your_production_secret
+   JWT_REFRESH_SECRET=your_production_secret
+   JWT_ACCESS_TTL=15m
+   JWT_REFRESH_TTL=7d
+   RAZORPAY_KEY_ID=rzp_live_...
+   RAZORPAY_KEY_SECRET=...
+   GROQ_API_KEY=your_groq_api_key
+   NOMINATIM_BASE_URL=https://nominatim.openstreetmap.org
+   STORAGE_DRIVER=local
+   PLATFORM_FEE_PERCENT=2.5
+   OTP_DELIVERY_MODE=email
+   RESEND_API_KEY=...
+   SMTP_HOST=smtp.gmail.com
+   SMTP_PORT=587
+   SMTP_USER=...
+   SMTP_PASS=...
+   MAIL_FROM=...
+   ```
+
+5. **Deploy**
+   - Click "Create Web Service"
+   - Render will auto-deploy from main branch
+   - Get your public URL: `https://your-app.onrender.com`
+
+### Option B: Railway
 
 1. **Create Railway Account** (https://railway.app)
 
@@ -69,6 +118,8 @@ This monorepo contains a Next.js frontend (apps/web) and NestJS backend (apps/ap
    ```
    PORT=4000
    NODE_ENV=production
+   APP_URL=https://your-app.railway.app
+   WEB_URL=https://your-frontend-domain.vercel.app
    DATABASE_URL=postgresql://...  (your Neon connection string)
    JWT_ACCESS_SECRET=your_production_secret
    JWT_REFRESH_SECRET=your_production_secret
@@ -76,10 +127,11 @@ This monorepo contains a Next.js frontend (apps/web) and NestJS backend (apps/ap
    JWT_REFRESH_TTL=7d
    RAZORPAY_KEY_ID=rzp_live_...
    RAZORPAY_KEY_SECRET=...
+   GROQ_API_KEY=your_groq_api_key
    NOMINATIM_BASE_URL=https://nominatim.openstreetmap.org
    STORAGE_DRIVER=local
    PLATFORM_FEE_PERCENT=2.5
-   OTP_DELIVERY_MODE=console
+   OTP_DELIVERY_MODE=email
    RESEND_API_KEY=...
    SMTP_HOST=smtp.gmail.com
    SMTP_PORT=587
@@ -90,23 +142,6 @@ This monorepo contains a Next.js frontend (apps/web) and NestJS backend (apps/ap
 
 6. **Get Public URL**
    - Railway provides a public URL like `https://your-app.railway.app`
-   - Update Vercel's `NEXT_PUBLIC_API_URL` to this URL
-
-### Option B: Render
-
-1. **Create Render Account** (https://render.com)
-
-2. **Create New Web Service**
-   - Connect GitHub
-   - Select repository
-   - Name: `cropcloud-api`
-   - Environment: Node
-   - Build Command: `pnpm install && pnpm build --filter=api`
-   - Start Command: `pnpm start --filter=api`
-
-3. **Set Environment Variables** (same as Railway above)
-
-4. **Deploy** - Render will auto-deploy from main branch
 
 ---
 
@@ -114,17 +149,19 @@ This monorepo contains a Next.js frontend (apps/web) and NestJS backend (apps/ap
 
 After both deployments:
 
-1. **Get API URL** from your backend hosting (Railway/Render)
-   - Example: `https://cropcloud-api.railway.app/api/v1`
+1. **Get API URL** from your backend hosting (Render/Railway)
+   - **Render**: `https://your-app.onrender.com`
+   - **Railway**: `https://your-app.railway.app`
 
-2. **Update Vercel Environment Variable**
-   - Dashboard → Settings → Environment Variables
-   - Update `NEXT_PUBLIC_API_URL` to your backend URL
-   - Trigger a redeployment
+2. **Update Frontend Environment Variable**
+   - Vercel Dashboard → Settings → Environment Variables
+   - Update `NEXT_PUBLIC_API_URL` to: `https://your-app.onrender.com/api/v1` (or your Render/Railway URL)
+   - Trigger a redeployment: `vercel --prod`
 
-3. **Update App URLs**
-   - Backend: Add your Vercel domain to CORS/allowed origins
-   - Frontend: `.env.production` should reference backend URL
+3. **Verify Backend Environment Variables**
+   - Backend must have:
+     - `APP_URL=https://your-app.onrender.com` (for internal service-to-service calls)
+     - `WEB_URL=https://your-frontend-domain.vercel.app` (for CORS configuration)
 
 ---
 

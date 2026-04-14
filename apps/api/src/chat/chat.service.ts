@@ -17,6 +17,10 @@ export class ChatService {
     return this.groq;
   }
 
+  private getInternalApiUrl(): string {
+    return process.env.APP_URL || 'http://localhost:4000';
+  }
+
   async getResponse(message: string, auth?: string): Promise<{ message: string }> {
     try {
       const groq = this.getGroq();
@@ -53,7 +57,7 @@ Possible intents:
       switch (parsed.intent) {
         case 'GET_PRODUCTS': {
           try {
-            const res = await fetch('http://127.0.0.1:4000/api/v1/products');
+            const res = await fetch(`${this.getInternalApiUrl()}/api/v1/products`);
             if (!res.ok) return { message: '⚠️ Could not fetch products right now.' };
             const data = await res.json();
             const items: any[] = Array.isArray(data) ? data : Array.isArray(data.items) ? data.items : [];
@@ -71,7 +75,7 @@ Possible intents:
         case 'GET_CART': {
           if (!auth) return { message: '🔒 Please log in to view your cart.' };
           try {
-            const res = await fetch('http://127.0.0.1:4000/api/v1/cart', {
+            const res = await fetch(`${this.getInternalApiUrl()}/api/v1/cart`, {
               headers: { Authorization: auth },
             });
             if (!res.ok) return { message: '⚠️ Could not fetch your cart. Please try again.' };
@@ -91,7 +95,7 @@ Possible intents:
         case 'GET_WISHLIST': {
           if (!auth) return { message: '🔒 Please log in to view your wishlist.' };
           try {
-            const res = await fetch('http://127.0.0.1:4000/api/v1/wishlist', {
+            const res = await fetch(`${this.getInternalApiUrl()}/api/v1/wishlist`, {
               headers: { Authorization: auth },
             });
             if (!res.ok) return { message: '⚠️ Could not fetch your wishlist. Please try again.' };
@@ -110,7 +114,7 @@ Possible intents:
         case 'TRACK_ORDER': {
           if (!auth) return { message: '🔒 Please log in to track your orders.' };
           try {
-            const res = await fetch('http://127.0.0.1:4000/api/v1/orders', {
+            const res = await fetch(`${this.getInternalApiUrl()}/api/v1/orders`, {
               headers: { Authorization: auth },
             });
             if (!res.ok) return { message: '⚠️ Could not fetch your orders. Please try again.' };
