@@ -9,3 +9,10 @@ apps/api/uploads/*
 !apps/api/uploads/.gitkeep
 
 .vercel
+
+# Build output
+*.tsbuildinfo
+*.d.ts
+.turbo
+build
+dist
