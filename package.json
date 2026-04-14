@@ -7,6 +7,7 @@
     "dev": "pnpm -r --parallel dev",
     "build": "pnpm -r build",
     "build:web": "pnpm --filter=web build",
+    "start": "node apps/api/dist/main.js",
     "lint": "pnpm -r lint",
     "format": "pnpm -r format",
     "db:generate": "pnpm --filter api prisma:generate",

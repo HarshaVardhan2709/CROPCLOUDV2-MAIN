@@ -6,7 +6,7 @@ services:
     repo: https://github.com/HarshaVardhan2709/CROPCLOUDV2-MAIN
     branch: master
     buildCommand: npm install -g pnpm && pnpm install && pnpm exec prisma generate && pnpm build
-    startCommand: cd apps/api && node dist/main.js
+    startCommand: pnpm start
     envVars:
       - key: NODE_ENV
         value: production
