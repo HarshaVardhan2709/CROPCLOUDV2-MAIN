@@ -12,6 +12,8 @@ services:
         value: production
       - key: PORT
         value: 4000
+      - key: WEB_URL
+        sync: false
       - key: DATABASE_URL
         sync: false
       - key: JWT_ACCESS_SECRET
@@ -21,4 +23,6 @@ services:
       - key: RAZORPAY_KEY_ID
         sync: false
       - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: GROQ_API_KEY
         sync: false
