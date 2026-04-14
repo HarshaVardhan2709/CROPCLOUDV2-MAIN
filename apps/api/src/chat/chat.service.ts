@@ -3,14 +3,24 @@ import Groq from 'groq-sdk';
 
 @Injectable()
 export class ChatService {
-  private groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY,
-  });
+  private groq: Groq | null = null;
+
+  private getGroq(): Groq {
+    if (!this.groq) {
+      if (!process.env.GROQ_API_KEY) {
+        throw new Error('GROQ_API_KEY environment variable is not set');
+      }
+      this.groq = new Groq({
+        apiKey: process.env.GROQ_API_KEY,
+      });
+    }
+    return this.groq;
+  }
 
   async getResponse(message: string, auth?: string): Promise<{ message: string }> {
     try {
-      // Step 1: Detect intent
-      const intentCompletion = await this.groq.chat.completions.create({
+      const groq = this.getGroq();
+      const intentCompletion = await groq.chat.completions.create({
         messages: [
           {
             role: 'system',
@@ -119,7 +129,7 @@ Possible intents:
 
         case 'GENERAL_CHAT':
         default: {
-          const chatCompletion = await this.groq.chat.completions.create({
+          const chatCompletion = await groq.chat.completions.create({
             messages: [
               {
                 role: 'system',
