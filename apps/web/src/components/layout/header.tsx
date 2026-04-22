@@ -43,81 +43,120 @@ export function Header() {
 
   return (
     <>
-      {/* ✅ Green top strip */}
+      {/* ✅ Top Banner */}
       <div style={{ background: 'linear-gradient(90deg, #1b4332 0%, #2d6a4f 50%, #1b4332 100%)' }}>
-        <div className="container-shell flex items-center justify-between gap-4 py-2 text-xs uppercase tracking-[0.18em] text-white/90">
-          <span>Verified farmers. Transparent pricing. Traceable lots.</span>
-          <span>Bulk-ready delivery across serviceable regions</span>
+        <div className="container-shell flex items-center justify-between gap-4 py-2.5 text-xs uppercase tracking-widest text-white/90">
+          <span className="hidden sm:inline">✓ Verified farmers • Transparent pricing • Traceable lots</span>
+          <span className="sm:hidden">✓ Verified farmers</span>
+          <span className="hidden md:inline">🚛 Bulk-ready delivery across regions</span>
         </div>
       </div>
 
-      <header className="sticky top-0 z-50 border-b border-[#2d6a4f]/10 bg-oat/90 backdrop-blur">
+      {/* Main Header */}
+      <header className="sticky top-0 z-50 border-b border-black/5 bg-white/95 backdrop-blur-md shadow-sm">
         <div className="container-shell py-4">
           <div className="flex items-center gap-4">
+            {/* Mobile Menu Button */}
             <button
-              className="rounded-full border border-[#2d6a4f]/20 p-3 lg:hidden hover:bg-[#2d6a4f]/5 transition-colors"
+              className="rounded-lg border border-black/10 p-2.5 lg:hidden hover:bg-black/5 transition-colors"
               onClick={() => setOpen((value) => !value)}
             >
-              <Menu className="h-5 w-5" />
+              <Menu className="h-5 w-5 text-black/70" />
             </button>
-            <Link href="/" className="text-2xl font-bold tracking-tight text-moss">
-              CropCloud
+
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2 text-2xl font-bold tracking-tight text-moss hover:text-moss/90 transition">
+              <span>🌾</span>
+              <span>CropCloud</span>
             </Link>
+
+            {/* Search Bar */}
             <div className="hidden flex-1 lg:block">
               <Suspense fallback={null}>
                 <SearchBar />
               </Suspense>
             </div>
-            <nav className="hidden items-center gap-5 lg:flex">
+
+            {/* Desktop Navigation */}
+            <nav className="hidden items-center gap-1 lg:flex">
               {links.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium text-black/75 transition hover:text-[#2d6a4f]"
+                  className="px-3 py-2 text-sm font-medium text-black/70 transition round hover:text-moss hover:bg-moss/5"
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
+
+            {/* Right Actions */}
             <div className="ml-auto flex items-center gap-2">
-              <Link href="/wishlist" className="rounded-full border border-[#2d6a4f]/20 p-3 hover:bg-[#2d6a4f]/5 transition-colors">
-                <Heart className="h-5 w-5" />
+              {/* Wishlist */}
+              <Link 
+                href="/wishlist" 
+                className="rounded-lg border border-black/10 p-2.5 hover:bg-red-50 hover:border-red-200 transition-all group"
+                title="Wishlist"
+              >
+                <Heart className="h-5 w-5 text-black/60 group-hover:text-red-500 transition" />
               </Link>
-              <Link href="/cart" className="rounded-full border border-[#2d6a4f]/20 p-3 hover:bg-[#2d6a4f]/5 transition-colors">
-                <ShoppingCart className="h-5 w-5" />
+
+              {/* Cart */}
+              <Link 
+                href="/cart" 
+                className="rounded-lg border border-black/10 p-2.5 hover:bg-blue-50 hover:border-blue-200 transition-all group"
+                title="Shopping Cart"
+              >
+                <ShoppingCart className="h-5 w-5 text-black/60 group-hover:text-blue-600 transition" />
               </Link>
+
+              {/* User Menu */}
               {user ? (
                 <>
                   <Link
                     href={getDashboardPath(user.role)}
-                    className="rounded-full border border-[#2d6a4f]/20 px-4 py-3 text-sm font-medium hover:bg-[#2d6a4f]/5 transition-colors"
+                    className="hidden sm:flex rounded-lg border border-black/10 px-4 py-2.5 text-sm font-semibold text-moss bg-moss/5 hover:bg-moss/10 transition-all items-center gap-2"
                   >
-                    {user.fullName.split(' ')[0]}
+                    👤 {user.fullName.split(' ')[0]}
                   </Link>
                   <button
                     type="button"
                     onClick={handleLogout}
-                    className="rounded-full border border-[#2d6a4f]/20 p-3 hover:bg-[#2d6a4f]/5 transition-colors"
+                    className="rounded-lg border border-black/10 p-2.5 hover:bg-red-50 hover:border-red-200 transition-all group"
+                    title="Logout"
                   >
-                    <LogOut className="h-5 w-5" />
+                    <LogOut className="h-5 w-5 text-black/60 group-hover:text-red-500 transition" />
                   </button>
                 </>
               ) : (
-                <Link href="/login" className="rounded-full border border-[#2d6a4f]/20 p-3 hover:bg-[#2d6a4f]/5 transition-colors">
-                  <User className="h-5 w-5" />
+                <Link 
+                  href="/login" 
+                  className="rounded-lg border border-black/10 p-2.5 hover:bg-green-50 hover:border-green-200 transition-all group"
+                  title="Login"
+                >
+                  <User className="h-5 w-5 text-black/60 group-hover:text-moss transition" />
                 </Link>
               )}
             </div>
           </div>
+
+          {/* Mobile Search Bar */}
           <div className="mt-3 lg:hidden">
             <Suspense fallback={null}>
               <SearchBar mobile />
             </Suspense>
           </div>
-          <div className={cn('overflow-hidden transition-all lg:hidden', open ? 'max-h-40 pt-4' : 'max-h-0')}>
-            <nav className="flex flex-col gap-3 rounded-3xl bg-white p-4 shadow-md">
+
+          {/* Mobile Navigation Menu */}
+          <div className={cn('overflow-hidden transition-all lg:hidden', open ? 'max-h-56 pt-4' : 'max-h-0')}>
+            <nav className="flex flex-col gap-2 rounded-xl bg-gradient-to-br from-moss/5 to-moss/10 p-4 border border-moss/10">
               {links.map((link) => (
-                <Link key={link.href} href={link.href} className="text-sm font-medium text-black/75 hover:text-[#2d6a4f]">
+                <Link 
+                  key={link.href} 
+                  href={link.href} 
+                  className="px-4 py-2.5 text-sm font-medium text-black/70 hover:text-moss hover:bg-white/50 rounded-lg transition"
+                  onClick={() => setOpen(false)}
+                >
                   {link.label}
                 </Link>
               ))}

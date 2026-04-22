@@ -50,7 +50,7 @@ export function Hero({ banners }: Pick<HomepageData, 'banners'>) {
             <p className="text-sm uppercase tracking-[0.22em] text-white/80">
               Harvest intelligence marketplace
             </p>
-            <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight md:text-6xl text-white">
               {banner.title}
             </h1>
             <p className="text-lg text-white/85">

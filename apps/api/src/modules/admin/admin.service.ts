@@ -97,11 +97,21 @@ export class AdminService {
 
   // 🏪 SELLER MANAGEMENT
   async listAllSellers(status?: SellerStatus) {
-    return this.prisma.sellerProfile.findMany({
-      where: status ? { approvalStatus: status } : undefined,
-      include: { user: true },
-      orderBy: { createdAt: 'desc' },
-    });
+    const [sellers, total] = await Promise.all([
+      this.prisma.sellerProfile.findMany({
+        where: status ? { approvalStatus: status } : undefined,
+        include: { user: true },
+        orderBy: { createdAt: 'desc' },
+      }),
+      this.prisma.sellerProfile.count({
+        where: status ? { approvalStatus: status } : undefined,
+      }),
+    ]);
+
+    return {
+      data: sellers,
+      pagination: { total },
+    };
   }
 
   async getSellerDetails(sellerId: string) {

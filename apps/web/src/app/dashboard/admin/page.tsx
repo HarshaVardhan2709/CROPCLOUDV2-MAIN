@@ -119,17 +119,15 @@ export default function AdminDashboardPage() {
                     <Link
                       key={seller.id}
                       href="/dashboard/admin/sellers"
-                      className="rounded-2xl bg-[#fffaf2] border border-yellow-200 p-4 hover:bg-[#fffbf0] transition"
+                      className="rounded-lg bg-white shadow-sm hover:shadow-md p-4 transition flex justify-between items-start gap-4"
                     >
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <p className="font-semibold text-black">{seller.businessName}</p>
-                          <p className="text-sm text-black/65">{seller.user.email}</p>
-                        </div>
-                        <span className="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-semibold">
-                          PENDING
-                        </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="font-semibold text-black truncate">{seller.businessName}</p>
+                        <p className="text-sm text-black/65 truncate">{seller.user.email}</p>
                       </div>
+                      <span className="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-semibold flex-shrink-0">
+                        PENDING
+                      </span>
                     </Link>
                   ))}
                 </div>

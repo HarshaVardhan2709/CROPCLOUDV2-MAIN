@@ -25,17 +25,30 @@ export default async function HomePage() {
   }
 
   // ✅ Fetch homepage data with explicit cache bypass
-  let data;
-  try {
-    data = await api.homepage();
-  } catch (error) {
-    console.error('Failed to fetch homepage data:', error);
-    throw new Error(`Homepage data fetch failed: ${error instanceof Error ? error.message : String(error)}`);
-  }
+  let data = {
+    banners: [],
+    categories: [],
+    featured: [],
+    deals: [],
+    seasonal: [],
+    recent: [],
+  };
 
-  // ✅ Validate data structure
-  if (!data || typeof data !== 'object') {
-    throw new Error('Invalid homepage data received from API');
+  try {
+    const response = await api.homepage();
+    if (response && typeof response === 'object') {
+      data = {
+        banners: response.banners ?? [],
+        categories: response.categories ?? [],
+        featured: response.featured ?? [],
+        deals: response.deals ?? [],
+        seasonal: response.seasonal ?? [],
+        recent: response.recent ?? [],
+      };
+    }
+  } catch (error) {
+    console.warn('Could not fetch homepage data, using empty defaults:', error instanceof Error ? error.message : String(error));
+    // Continue with empty defaults instead of throwing
   }
 
   return (

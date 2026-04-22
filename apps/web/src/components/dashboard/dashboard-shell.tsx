@@ -23,7 +23,7 @@ export function DashboardShell({
         style={{ background: 'linear-gradient(135deg, #1b4332 0%, #2d6a4f 60%, #40916c 100%)' }}
       >
         <p className="text-sm uppercase tracking-[0.18em] text-white/65">Dashboard</p>
-        <h1 className="mt-3 text-4xl font-semibold">{title}</h1>
+        <h1 className="mt-3 text-4xl font-semibold text-white">{title}</h1>
         <p className="mt-3 max-w-2xl text-sm text-white/70">{description}</p>
       </div>
 
